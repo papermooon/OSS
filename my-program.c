@@ -12,23 +12,20 @@ int main(int argc,char *argv[]) {
     }
 	
 	FILE *fp = NULL;
-	fp = fopen(argv[0], "r");
+	fp = fopen(argv[1], "r");
+	
 	if(fp==NULL)
-	printf("!!!!!!!!");
+	{
+		printf("!!!!!!!!");
+			printf("%s",argv[1]);
+		
+	}
+		
 	else
 	{
-	fgets(buff,2000, (FILE*)fp);
-	
-	puts(buff);
-	fgets(buff,2000, (FILE*)fp);
-	
-	puts(buff);
-	fgets(buff,2000, (FILE*)fp);
-	
-	puts(buff);
-	fgets(buff,2000, (FILE*)fp);
-	
-	puts(buff);
+		fgets(buff,2000,(FILE*)fp);
+		puts(buff);
+		printf("%s",argv[1]);
 	}
 
 	
