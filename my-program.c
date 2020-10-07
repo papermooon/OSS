@@ -79,7 +79,7 @@ int main(int argc,char *argv[]) {
 		while(fgets(buff,sizeof(buff),(FILE*)fp))
 		{
 			sign=0;
-			while(sign<strlen(buff))
+			while(sign<strlen(buff)-1)
 			{
 				while(buff[sign]==' ')
 				sign++;
