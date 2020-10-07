@@ -79,7 +79,7 @@ int main(int argc,char *argv[]) {
 		while(fgets(buff,sizeof(buff),(FILE*)fp))
 		{
 			sign=0;
-			while(sign<strlen(buff)-1)
+			while(sign<strlen(buff))
 			{
 				while(buff[sign]==' ')
 				sign++;
@@ -134,9 +134,13 @@ int main(int argc,char *argv[]) {
 					else if(readingWord==')') {printf("RParenthesis\n"); sign++;}
 					else
 					{
-						printf("Unknown\n");
-						error=1;
-						break;
+						sign++;
+						if(readingWord!='\n'&&readingWord!='\r')
+						{
+							printf("Unknown\n");
+							error=1;
+							break;
+						}
 					}	
 				
 			}
