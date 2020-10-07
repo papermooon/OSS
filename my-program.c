@@ -20,6 +20,15 @@ int main(int argc,char *argv[]) {
 	fgets(buff,2000, (FILE*)fp);
 	
 	puts(buff);
+	fgets(buff,2000, (FILE*)fp);
+	
+	puts(buff);
+	fgets(buff,2000, (FILE*)fp);
+	
+	puts(buff);
+	fgets(buff,2000, (FILE*)fp);
+	
+	puts(buff);
 	}
 
 	
