@@ -81,7 +81,7 @@ int main(int argc,char *argv[]) {
 			sign=0;
 			while(sign<strlen(buff))
 			{
-				while(!buff[sign])
+				while(buff[sign]==' ')
 				sign++;
 				
 				readingWord=buff[sign];
