@@ -138,14 +138,11 @@ int main(int argc,char *argv[]) {
 						if(readingWord!='\n'&&readingWord!='\r')
 						{
 							printf("Unknown\n");
-							error=1;
 							break;
 						}
 					}	
 				
 			}
-			
-			if(error==1)break;
 		}
 		
 	}
