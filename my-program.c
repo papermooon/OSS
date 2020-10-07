@@ -12,10 +12,16 @@ int main(int argc,char *argv[]) {
     }
 	
 	FILE *fp = NULL;
-	fp = fopen(argv[0], "r");
+	fp = fopen(argv[0], "rb");
+	if(fp==NULL)
+	printf("!!!!!!!!");
+	else
+	{
 	fgets(buff,2000, (FILE*)fp);
 	
 	puts(buff);
+	}
+
 	
     return 0;
 }
