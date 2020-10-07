@@ -53,7 +53,7 @@ void change(char tt[],int last)
 		j++;
 	}
 	
-	printf("%d\n",sum);
+	printf("Int(%d)\n",sum);
 	return ;
 }
  
