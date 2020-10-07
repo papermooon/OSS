@@ -4,6 +4,7 @@
  char readingWord;
  int sign;
  int leng;
+ int error;
  
  char token[100];
  int t_id;
@@ -74,68 +75,73 @@ int main(int argc,char *argv[]) {
 		
 	else
 	{
+		error=0;
 		while(fgets(buff,sizeof(buff),(FILE*)fp))
 		{
 			sign=0;
-			
-			while(!buff[sign])
+			while(sign<strlen(buff))
+			{
+				while(!buff[sign])
 				sign++;
-			
-			readingWord=buff[sign];
 				
-				if(isalpha(readingWord))
-				{
-					memset(token,0,sizeof(token));
-					t_id=0;
+				readingWord=buff[sign];
 					
-					while(isalpha(buff[sign])||isdigit(buff[sign]))
+					if(isalpha(readingWord))
 					{
-						token[t_id]=buff[sign];
-						t_id++;
-						sign++;
+						memset(token,0,sizeof(token));
+						t_id=0;
+						
+						while(isalpha(buff[sign])||isdigit(buff[sign]))
+						{
+							token[t_id]=buff[sign];
+							t_id++;
+							sign++;
+						}	
+						
+						if(!com(token))
+						{
+							printf("Ident(%s)\n",token);
+						}
+					}
+					
+					else if(isdigit(readingWord))
+					{
+						memset(token,0,sizeof(token));
+						t_id=0;
+						
+						while(isdigit(buff[sign]))
+						{
+							token[t_id]=buff[sign];
+							t_id++;
+							sign++;
+						}
+						
+						change(token,t_id);
 					}	
 					
-					if(!com(token))
+					else if(readingWord==':')
 					{
-						printf("Ident(%s)\n",token);
-					}
-				}
-				
-				else if(isdigit(readingWord))
-				{
-					memset(token,0,sizeof(token));
-					t_id=0;
-					
-					while(isdigit(buff[sign]))
-					{
-						token[t_id]=buff[sign];
-						t_id++;
 						sign++;
-					}
-					
-					change(token,t_id);
-				}	
-				
-				else if(readingWord==':')
-				{
-					sign++;
-					if(sign<strlen(buff)&&buff[sign]=='=')
-						printf("Assign\n");
+						if(sign<strlen(buff)&&buff[sign]=='=')
+							printf("Assign\n");
+						else
+							printf("Colon\n");
+					} 
+					else if(readingWord=='+') {printf("Plus\n");  sign++;}
+					else if(readingWord=='*') {printf("Star\n"); sign++;}
+					else if(readingWord==',') {printf("Comma\n"); sign++;}
+					else if(readingWord=='(') {printf("LParenthesis\n"); sign++;}
+					else if(readingWord==')') {printf("RParenthesis\n"); sign++;}
 					else
-						printf("Colon\n");
-				} 
-				else if(readingWord=='+') printf("Plus\n");
-				else if(readingWord=='*') printf("Star\n");
-				else if(readingWord==',') printf("Comma\n");
-				else if(readingWord=='(') printf("LParenthesis\n");
-				else if(readingWord==')') printf("RParenthesis\n");
-//				else if(readingWord==':=') printf("Colon\n");
-				else
-				{
-					printf("Unknown\n");
-					break;
-				}
+					{
+						printf("Unknown\n");
+						error=1;
+						break;
+					}	
+				
+			}
 			
+			if(error==1)break;
 		}
 		
 	}
