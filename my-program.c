@@ -123,7 +123,11 @@ int main(int argc,char *argv[]) {
 					{
 						sign++;
 						if(sign<strlen(buff)&&buff[sign]=='=')
+						{
 							printf("Assign\n");
+							sign++; 
+						} 
+							
 						else
 							printf("Colon\n");
 					} 
