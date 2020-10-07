@@ -12,7 +12,7 @@ int main(int argc,char *argv[]) {
     }
 	
 	FILE *fp = NULL;
-	fp = fopen(argv[0], "rb");
+	fp = fopen(argv[0], "r");
 	if(fp==NULL)
 	printf("!!!!!!!!");
 	else
