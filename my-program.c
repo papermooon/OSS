@@ -23,6 +23,11 @@ int com(char x[])
 		printf("End\n");
 		return 1;
 	}
+	if(strcmp(x,"ELSE")==0)
+	{
+		printf("Else\n");
+		return 1;
+	}
 	if(strcmp(x,"FOR")==0)
 	{
 		printf("For\n");
