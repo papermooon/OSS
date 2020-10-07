@@ -2,7 +2,7 @@
 #include<string.h>
  char readingWord;
  char token[100];
- char standin[200];
+ char buff[2000];
  
 int main(int argc,char *argv[]) {
     int count;
@@ -10,6 +10,12 @@ int main(int argc,char *argv[]) {
     for (count = 1; count < argc; ++count) {
         printf("%d: %s\n",count,argv[count]);
     }
-
+	
+	FILE *fp = NULL;
+	fp = fopen(argv[0], "r");
+	fgets(buff,2000, (FILE*)fp);
+	
+	puts(buff);
+	
     return 0;
 }
