@@ -204,7 +204,7 @@ public final class Analyser {
 
         analyseConstantDeclaration();
         analyseVariableDeclaration();
-         analyseStatementSequence();
+        analyseStatementSequence();
 //        throw new Error("Not implemented");
     }
 
@@ -219,6 +219,7 @@ public final class Analyser {
             // 等于号
             expect(TokenType.Equal);
 
+            instructions.add(new Instruction(Operation.LIT, 0));//常量占个位置
             // 常表达式
             analyseConstantExpression();
 
@@ -239,16 +240,13 @@ public final class Analyser {
             var wor=expect(TokenType.Ident);
             
             addSymbol(wor.getValueString(),false,false,wor.getStartPos());
-
-
             int bias=getOffset(wor.getValueString(),wor.getStartPos());
+            instructions.add(new Instruction(Operation.LIT, 0));//付给他初值0
 
             if(nextIf(TokenType.Equal)!=null)
             {
                 analyseExpression();
-
                 instructions.add(new Instruction(Operation.STO,bias));
-
                 declareSymbol(wor.getValueString(),wor.getStartPos());
             }
             expect(TokenType.Semicolon);
@@ -258,10 +256,7 @@ public final class Analyser {
 
     //语句序列
     private void analyseStatementSequence() throws CompileError {
-
-
             analyseStatement();
-
 //        throw new Error("Not implemented");
     }
 
@@ -323,6 +318,7 @@ public final class Analyser {
             if(check(TokenType.Plus)||check(TokenType.Minus))
             {
                 int subb=0;
+
                 if(check(TokenType.Minus))
                     subb=1;
 
@@ -330,13 +326,14 @@ public final class Analyser {
 
                 if(subb==1)
                 {
-                    instructions.add(new Instruction(Operation.LIT, 0));
                     analyseItem();
                     instructions.add(new Instruction(Operation.SUB));
                 }
                 else
-                    analyseItem();
-
+                    {
+                        analyseItem();
+                        instructions.add(new Instruction(Operation.ADD));
+                    }
             }
             else break;
         }
@@ -351,6 +348,12 @@ public final class Analyser {
         {
             expect(TokenType.Equal);
             analyseExpression();
+
+            int bias=getOffset(x.getValueString(),x.getStartPos());//看看是否定义过
+            if(isConstant(x.getValueString(),x.getStartPos()))
+                throw new AnalyzeError(ErrorCode.AssignToConstant, x.getStartPos());
+                //常量不能再赋值了
+            instructions.add(new Instruction(Operation.STO,bias));
             expect(TokenType.Semicolon);
         }
     }
@@ -426,7 +429,11 @@ public final class Analyser {
         } else if (check(TokenType.LParen)) {
             // 调用相应的处理函数
             nextIf(TokenType.LParen);
+
+            instructions.add(new Instruction(Operation.LIT, 0));
+
             analyseExpression();
+
             expect(TokenType.RParen);
         } else {
             // 都不是，摸了
