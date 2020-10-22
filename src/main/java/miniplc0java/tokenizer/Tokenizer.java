@@ -69,23 +69,23 @@ public class Tokenizer {
         // -- 前进一个字符，并存储这个字符
         //
         // 尝试将存储的字符串解释为关键字
-        if(a.equals("Begin"))
+        if(a.equals("Begin")||a.equals("begin"))
         {
             return new Token(TokenType.Begin,a, it.previousPos(), it.currentPos());
         }
-        if(a.equals("End"))
+        if(a.equals("End")||a.equals("end"))
         {
             return new Token(TokenType.End,a, it.previousPos(), it.currentPos());
         }
-        if(a.equals("Var"))
+        if(a.equals("Var")||a.equals("var"))
         {
             return new Token(TokenType.Var,a, it.previousPos(), it.currentPos());
         }
-        if(a.equals("Const"))
+        if(a.equals("Const")||a.equals("const"))
         {
             return new Token(TokenType.Const,a, it.previousPos(), it.currentPos());
         }
-        if(a.equals("Print"))
+        if(a.equals("Print")||a.equals("print"))
         {
             return new Token(TokenType.Print,a, it.previousPos(), it.currentPos());
         }
