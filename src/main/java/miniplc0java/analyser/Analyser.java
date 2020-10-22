@@ -424,6 +424,10 @@ public final class Analyser {
         } else if (check(TokenType.Uint)) {
             // 调用相应的处理函数
             Token x=nextIf(TokenType.Uint);
+
+            if(((Integer)x.getValue())>2147483647 || ((Integer)x.getValue())<0)
+                throw new AnalyzeError(ErrorCode.IntegerOverflow, x.getStartPos());
+
             instructions.add(new Instruction(Operation.LIT, (Integer)x.getValue()));
 
         } else if (check(TokenType.LParen)) {
