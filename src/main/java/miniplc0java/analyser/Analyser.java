@@ -303,10 +303,11 @@ public final class Analyser {
 
             if(check(TokenType.Uint))
             {
+                if(sig==1)
+                    instructions.add(new Instruction(Operation.LIT, 0));
                 instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
                 if(sig==1)
                 {
-                    instructions.add(new Instruction(Operation.LIT, 0));
                     instructions.add(new Instruction(Operation.SUB));
                 }
 
