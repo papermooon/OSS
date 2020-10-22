@@ -408,10 +408,15 @@ public final class Analyser {
         if (check(TokenType.Ident)){
             // 调用相应的处理函数
             Token x=nextIf(TokenType.Ident);
+
+            var entry = this.symbolTable.get(x.getValueString());
+            if(entry==null)//是否声明
+                throw new AnalyzeError(ErrorCode.NotDeclared, x.getStartPos());
+
             //查看是否定义过；
             int bias=getOffset(x.getValueString(),x.getStartPos());
             //查看是否付了值
-            var entry = this.symbolTable.get(x.getValueString());
+//            var entry = this.symbolTable.get(x.getValueString());
                 if(entry.isInitialized)
                 {
                     instructions.add(new Instruction(Operation.LOD,bias));
@@ -425,9 +430,8 @@ public final class Analyser {
             // 调用相应的处理函数
             Token x=nextIf(TokenType.Uint);
 
-            if(((Integer)x.getValue())>2147483647 || ((Integer)x.getValue())<0)
-                throw new AnalyzeError(ErrorCode.IntegerOverflow, x.getStartPos());
-
+//            if(((Integer)x.getValue())>2147483647 || ((Integer)x.getValue())<0)
+//                throw new AnalyzeError(ErrorCode.IntegerOverflow, x.getStartPos());
             instructions.add(new Instruction(Operation.LIT, (Integer)x.getValue()));
 
         } else if (check(TokenType.LParen)) {
