@@ -217,7 +217,7 @@ public final class Analyser {
 
             addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
 
-//            instructions.add(new Instruction(Operation.LIT, 0));
+            instructions.add(new Instruction(Operation.LIT, 0));
             // 等于号
             expect(TokenType.Equal);
 
@@ -238,7 +238,7 @@ public final class Analyser {
         {
             var wor=expect(TokenType.Ident);
 
-//            instructions.add(new Instruction(Operation.LIT, 0));
+            instructions.add(new Instruction(Operation.LIT, 0));
 
             addSymbol(wor.getValueString(),false,false,wor.getStartPos());
 
@@ -291,8 +291,8 @@ public final class Analyser {
 
         if(check(TokenType.Uint))
         {
-            if(sig==1)
-                instructions.add(new Instruction(Operation.LIT, 0));
+
+            instructions.add(new Instruction(Operation.LIT, 0));
 
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
             if(sig==1)
