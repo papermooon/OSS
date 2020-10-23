@@ -289,9 +289,8 @@ public final class Analyser {
             sig=1;
         }
 
-        expect(TokenType.Uint);
-
-
+        if(check(TokenType.Uint))
+        {
             instructions.add(new Instruction(Operation.LIT, 0));
 
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
@@ -301,6 +300,10 @@ public final class Analyser {
             }
             else
                 instructions.add(new Instruction(Operation.ADD));
+        }
+
+
+
 
     }
 
