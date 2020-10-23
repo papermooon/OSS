@@ -409,7 +409,7 @@ public final class Analyser {
             // 调用相应的处理函数
             nextIf(TokenType.LParen);
 
-            instructions.add(new Instruction(Operation.LIT, 0));
+//            instructions.add(new Instruction(Operation.LIT, 0));
 
             analyseExpression();
 
