@@ -214,10 +214,10 @@ public final class Analyser {
         while (nextIf(TokenType.Const) != null) {
             // 变量名
             var nameToken = expect(TokenType.Ident);
-            instructions.add(new Instruction(Operation.LIT, 0));
-            addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
-//            System.out.println("LIT 0");
 
+            addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
+
+            instructions.add(new Instruction(Operation.LIT, 0));
             // 等于号
             expect(TokenType.Equal);
 
@@ -226,7 +226,6 @@ public final class Analyser {
 
             int bias=getOffset(nameToken.getValueString(),nameToken.getStartPos());
             instructions.add(new Instruction(Operation.STO,bias));
-//            System.out.println("STO");
 
             declareSymbol(nameToken.getValueString(),nameToken.getStartPos());
             // 分号
@@ -240,7 +239,6 @@ public final class Analyser {
             var wor=expect(TokenType.Ident);
 
             instructions.add(new Instruction(Operation.LIT, 0));
-//            System.out.println("LIT");
 
             addSymbol(wor.getValueString(),false,false,wor.getStartPos());
 
@@ -250,7 +248,6 @@ public final class Analyser {
                 analyseExpression();
                 int bias=getOffset(wor.getValueString(),wor.getStartPos());
                 instructions.add(new Instruction(Operation.STO,bias));
-//                System.out.println("STO");
 
                 declareSymbol(wor.getValueString(),wor.getStartPos());
             }
@@ -292,21 +289,18 @@ public final class Analyser {
             sig=1;
         }
 
-        expect(TokenType.Uint);
-            if(sig==1)
-            {
-                instructions.add(new Instruction(Operation.LIT, 0));
-            }
-//            System.out.println("LIT");
+        if(check(TokenType.Uint))
+        {
+
+            instructions.add(new Instruction(Operation.LIT, 0));
 
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
-//            System.out.println("LIT");
             if(sig==1)
             {
                 instructions.add(new Instruction(Operation.SUB));
             }
 
-
+        }
     }
 
     private void analyseExpression() throws CompileError {
