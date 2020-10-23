@@ -214,10 +214,10 @@ public final class Analyser {
         while (nextIf(TokenType.Const) != null) {
             // 变量名
             var nameToken = expect(TokenType.Ident);
-
+            instructions.add(new Instruction(Operation.LIT, 0));
             addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
 
-            instructions.add(new Instruction(Operation.LIT, 0));
+
             // 等于号
             expect(TokenType.Equal);
 
