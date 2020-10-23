@@ -371,10 +371,11 @@ public final class Analyser {
 
     private void analyseFactor() throws CompileError {
         boolean negate;
+        instructions.add(new Instruction(Operation.LIT, 0));
         if (nextIf(TokenType.Minus) != null) {
             negate = true;
             // 计算结果需要被 0 减
-            instructions.add(new Instruction(Operation.LIT, 0));
+
         } else {
             nextIf(TokenType.Plus);
             negate = false;
