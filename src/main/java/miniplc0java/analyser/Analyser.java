@@ -214,10 +214,10 @@ public final class Analyser {
         while (nextIf(TokenType.Const) != null) {
             // 变量名
             var nameToken = expect(TokenType.Ident);
-
-            addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
-
             instructions.add(new Instruction(Operation.LIT, 0));
+            addSymbol(nameToken.getValueString(),false,true,nameToken.getStartPos());
+//            System.out.println("LIT 0");
+
             // 等于号
             expect(TokenType.Equal);
 
@@ -226,6 +226,7 @@ public final class Analyser {
 
             int bias=getOffset(nameToken.getValueString(),nameToken.getStartPos());
             instructions.add(new Instruction(Operation.STO,bias));
+//            System.out.println("STO");
 
             declareSymbol(nameToken.getValueString(),nameToken.getStartPos());
             // 分号
@@ -239,6 +240,7 @@ public final class Analyser {
             var wor=expect(TokenType.Ident);
 
             instructions.add(new Instruction(Operation.LIT, 0));
+//            System.out.println("LIT");
 
             addSymbol(wor.getValueString(),false,false,wor.getStartPos());
 
@@ -248,6 +250,7 @@ public final class Analyser {
                 analyseExpression();
                 int bias=getOffset(wor.getValueString(),wor.getStartPos());
                 instructions.add(new Instruction(Operation.STO,bias));
+//                System.out.println("STO");
 
                 declareSymbol(wor.getValueString(),wor.getStartPos());
             }
@@ -289,18 +292,21 @@ public final class Analyser {
             sig=1;
         }
 
-        if(check(TokenType.Uint))
-        {
-
-            instructions.add(new Instruction(Operation.LIT, 0));
+        expect(TokenType.Uint);
+//            if(sig==1)
+//            {
+//                instructions.add(new Instruction(Operation.LIT, 0));
+//            }
+//            System.out.println("LIT");
 
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
+//            System.out.println("LIT");
             if(sig==1)
             {
                 instructions.add(new Instruction(Operation.SUB));
             }
 
-        }
+
     }
 
     private void analyseExpression() throws CompileError {
@@ -371,11 +377,10 @@ public final class Analyser {
 
     private void analyseFactor() throws CompileError {
         boolean negate;
-        instructions.add(new Instruction(Operation.LIT, 0));
         if (nextIf(TokenType.Minus) != null) {
             negate = true;
             // 计算结果需要被 0 减
-
+            instructions.add(new Instruction(Operation.LIT, 0));
         } else {
             nextIf(TokenType.Plus);
             negate = false;
@@ -400,9 +405,6 @@ public final class Analyser {
         } else if (check(TokenType.Uint)) {
             // 调用相应的处理函数
             Token x=nextIf(TokenType.Uint);
-
-//            if(((Integer)x.getValue())>2147483647 || ((Integer)x.getValue())<0)
-//                throw new AnalyzeError(ErrorCode.IntegerOverflow, x.getStartPos());
             instructions.add(new Instruction(Operation.LIT, (Integer)x.getValue()));
 
         } else if (check(TokenType.LParen)) {
