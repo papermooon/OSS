@@ -293,10 +293,10 @@ public final class Analyser {
         }
 
         expect(TokenType.Uint);
-//            if(sig==1)
-//            {
-//                instructions.add(new Instruction(Operation.LIT, 0));
-//            }
+            if(sig==1)
+            {
+                instructions.add(new Instruction(Operation.LIT, 0));
+            }
 //            System.out.println("LIT");
 
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
