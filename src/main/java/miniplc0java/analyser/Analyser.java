@@ -287,20 +287,19 @@ public final class Analyser {
         {
             next();
             sig=1;
+            instructions.add(new Instruction(Operation.LIT, 0));
         }
 
-        if(check(TokenType.Uint))
-        {
+//        if(check(TokenType.Uint))
 
-            instructions.add(new Instruction(Operation.LIT, 0));
-
+            expect(TokenType.Uint);
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
             if(sig==1)
             {
                 instructions.add(new Instruction(Operation.SUB));
             }
 
-        }
+
     }
 
     private void analyseExpression() throws CompileError {
