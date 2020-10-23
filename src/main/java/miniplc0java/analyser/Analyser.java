@@ -299,7 +299,8 @@ public final class Analyser {
             {
                 instructions.add(new Instruction(Operation.SUB));
             }
-
+            else
+                instructions.add(new Instruction(Operation.ADD));
 
     }
 
