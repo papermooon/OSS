@@ -287,12 +287,13 @@ public final class Analyser {
         {
             next();
             sig=1;
-            instructions.add(new Instruction(Operation.LIT, 0));
         }
 
-//        if(check(TokenType.Uint))
+        expect(TokenType.Uint);
 
-            expect(TokenType.Uint);
+
+            instructions.add(new Instruction(Operation.LIT, 0));
+
             instructions.add(new Instruction(Operation.LIT, (Integer)next().getValue()));
             if(sig==1)
             {
