@@ -129,7 +129,9 @@ int main(int argc,char *argv[]) {
 					iner=ide(stackIn[s1-2]);
 				
 				outer=ide(stackOut[step]);
-
+				
+				if(stackOut[0]==10||stackOut[0]==13)
+								return;
 				
 				
 				if(martrix[iner][outer]==7)
