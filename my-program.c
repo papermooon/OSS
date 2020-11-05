@@ -131,15 +131,15 @@ int main(int argc,char *argv[]) {
 				outer=ide(stackOut[step]);
 				
 				if(stackOut[0]==10||stackOut[0]==13)
-								return;
+								return 0;
 				
 				
 				if(martrix[iner][outer]==7)
 				{
 					if(iner==5&&outer==5)
-						return;
+						return 0;
 					printf("E\n");
-					return;
+					return 0;
 				}
 				else if(martrix[iner][outer]==-1||martrix[iner][outer]==0)//里面的小于等于外面的就移进
 				{
@@ -179,7 +179,7 @@ int main(int argc,char *argv[]) {
 					if(!success)
 						{
 							printf("RE\n");
-							return;
+							return 0;
 						}
 					// j 到 sig 就是要规约的
 					else
@@ -189,12 +189,12 @@ int main(int argc,char *argv[]) {
 							printf("R\n");
 							
 							if(stackOut[0]==10||stackOut[0]==13)
-								return;
+								return 0;
 						}
 						else
 						{
 							printf("RE\n");
-							return ;
+							return 0;
 						}
 					}
 					 
