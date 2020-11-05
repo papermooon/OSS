@@ -122,6 +122,11 @@ int main(int argc,char *argv[]) {
 				
 				outer=ide(stackOut[step]);
 				
+				if(stackOut[step]==10||stackOut[step]==13)
+					{
+						return ;
+					}
+				
 				if(stackOut[step]=='#'&&iner==5)
 					{
 						return ;
