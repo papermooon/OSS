@@ -104,7 +104,15 @@ int main(int argc,char *argv[]) {
 			s1++;
 
 			strcpy(stackOut,buff);
-			s2=strlen(buff);
+			
+			int h=0;
+			for(;h<strlen(stackOut);h++)
+			{
+				if(stackOut[h]==10||stackOut[h]==13)
+					break;
+			}
+			
+			s2=h;
 			stackOut[s2]='#';
 			s2++;
 			//s1s2指的地方永远是空的
@@ -121,20 +129,13 @@ int main(int argc,char *argv[]) {
 					iner=ide(stackIn[s1-2]);
 				
 				outer=ide(stackOut[step]);
-				
-				if(stackOut[step]==10||stackOut[step]==13)
-					{
-						return ;
-					}
-				
-				if(stackOut[step]=='#'&&iner==5)
-					{
-						return ;
-					}
+
 				
 				
 				if(martrix[iner][outer]==7)
 				{
+					if(iner==5&&outer==5)
+						return;
 					printf("E\n");
 					return;
 				}
@@ -184,6 +185,9 @@ int main(int argc,char *argv[]) {
 						if(match(j,s1-1))
 						{
 							printf("R\n");
+							
+							if(stackOut[0]==10||stackOut[0]==13)
+								return;
 						}
 						else
 						{
