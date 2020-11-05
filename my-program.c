@@ -129,6 +129,11 @@ int main(int argc,char *argv[]) {
 					iner=ide(stackIn[s1-2]);
 				
 				outer=ide(stackOut[step]);
+				if(outer==-1)
+				{
+					printf("E\n");
+					return 0;
+				}
 				
 				if(stackOut[0]==10||stackOut[0]==13)
 								return 0;
